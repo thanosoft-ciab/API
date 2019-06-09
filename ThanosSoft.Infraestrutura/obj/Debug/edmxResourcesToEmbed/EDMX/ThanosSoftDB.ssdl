@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThanosSoftDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbTiposDocumentos">
+    <Key>
+      <PropertyRef Name="codTipoDocumento" />
+    </Key>
+    <Property Name="codTipoDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="50" />
+    <Property Name="ativo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbUsuarios">
+    <Key>
+      <PropertyRef Name="codUsuario" />
+    </Key>
+    <Property Name="codUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="50" />
+    <Property Name="sobrenome" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="rg" Type="nvarchar" MaxLength="50" />
+    <Property Name="cpf" Type="nvarchar" MaxLength="50" />
+    <Property Name="cnh" Type="nvarchar" MaxLength="50" />
+    <Property Name="tipocnh" Type="nvarchar" MaxLength="50" />
+    <Property Name="dataNascimento" Type="datetime" />
+    <Property Name="sexo" Type="char" MaxLength="1" />
+    <Property Name="estadoCivil" Type="nvarchar" MaxLength="50" />
+    <Property Name="nomePai" Type="nvarchar" MaxLength="50" />
+    <Property Name="nomeMae" Type="nvarchar" MaxLength="50" />
+    <Property Name="cartaoCidadao" Type="nvarchar" MaxLength="50" />
+    <Property Name="cartaoSus" Type="nvarchar" MaxLength="50" />
+    <Property Name="carteiraTrabalhoNumero" Type="nvarchar" MaxLength="50" />
+    <Property Name="certidaoNascimento" Type="nvarchar" MaxLength="50" />
+    <Property Name="certidaoCasamento" Type="nvarchar" MaxLength="50" />
+    <Property Name="conjuge" Type="nvarchar" MaxLength="50" />
+    <Property Name="cpfConjuge" Type="nvarchar" MaxLength="50" />
+    <Property Name="rgConjuge" Type="nvarchar" MaxLength="50" />
+    <Property Name="endereco" Type="nvarchar" MaxLength="50" />
+    <Property Name="bairro" Type="nvarchar" MaxLength="50" />
+    <Property Name="cidade" Type="nvarchar" MaxLength="50" />
+    <Property Name="estado" Type="char" MaxLength="2" />
+    <Property Name="senha" Type="nvarchar(max)" />
+    <Property Name="tipoCadastro" Type="int" />
+    <Property Name="dataCadastro" Type="datetime" />
+    <Property Name="dataUltimaAtualizacao" Type="datetime" />
+    <Property Name="ativo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbUsuariosDocumentos">
+    <Key>
+      <PropertyRef Name="codUsuario" />
+      <PropertyRef Name="codTipoDocumento" />
+    </Key>
+    <Property Name="codUsuario" Type="int" Nullable="false" />
+    <Property Name="codTipoDocumento" Type="int" Nullable="false" />
+    <Property Name="arquivo" Type="binary" MaxLength="50" />
+    <Property Name="tipoArquivo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tbUsuariosDocumentos_tbTiposDocumentos">
+    <End Role="tbTiposDocumentos" Type="Self.tbTiposDocumentos" Multiplicity="1" />
+    <End Role="tbUsuariosDocumentos" Type="Self.tbUsuariosDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTiposDocumentos">
+        <PropertyRef Name="codTipoDocumento" />
+      </Principal>
+      <Dependent Role="tbUsuariosDocumentos">
+        <PropertyRef Name="codTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbUsuariosDocumentos_tbUsuarios">
+    <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+    <End Role="tbUsuariosDocumentos" Type="Self.tbUsuariosDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbUsuarios">
+        <PropertyRef Name="codUsuario" />
+      </Principal>
+      <Dependent Role="tbUsuariosDocumentos">
+        <PropertyRef Name="codUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ThanosSoftDBModelStoreContainer">
+    <EntitySet Name="tbTiposDocumentos" EntityType="Self.tbTiposDocumentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbUsuariosDocumentos" EntityType="Self.tbUsuariosDocumentos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbUsuariosDocumentos_tbTiposDocumentos" Association="Self.FK_tbUsuariosDocumentos_tbTiposDocumentos">
+      <End Role="tbTiposDocumentos" EntitySet="tbTiposDocumentos" />
+      <End Role="tbUsuariosDocumentos" EntitySet="tbUsuariosDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbUsuariosDocumentos_tbUsuarios" Association="Self.FK_tbUsuariosDocumentos_tbUsuarios">
+      <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+      <End Role="tbUsuariosDocumentos" EntitySet="tbUsuariosDocumentos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

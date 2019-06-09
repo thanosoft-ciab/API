@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2304873b510d4ac28f65e9c2f93dfdf3" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="ThanosSoftDBModel.TipoDocumento" Width="2" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThanosSoftDBModel.Usuario" Width="2" PointX="5.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThanosSoftDBModel.UsuarioDocumento" Width="1.875" PointX="3.125" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="ThanosSoftDBModel.FK_tbUsuariosDocumentos_tbTiposDocumentos" ManuallyRouted="false" />
+        <AssociationConnector Association="ThanosSoftDBModel.FK_tbUsuariosDocumentos_tbUsuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

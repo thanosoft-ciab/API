@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ThanosSoftDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbTiposDocumentos">
+          <Key>
+            <PropertyRef Name="codTipoDocumento" />
+          </Key>
+          <Property Name="codTipoDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+          </Key>
+          <Property Name="codUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="sobrenome" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="rg" Type="nvarchar" MaxLength="50" />
+          <Property Name="cpf" Type="nvarchar" MaxLength="50" />
+          <Property Name="cnh" Type="nvarchar" MaxLength="50" />
+          <Property Name="tipocnh" Type="nvarchar" MaxLength="50" />
+          <Property Name="dataNascimento" Type="datetime" />
+          <Property Name="sexo" Type="char" MaxLength="1" />
+          <Property Name="estadoCivil" Type="nvarchar" MaxLength="50" />
+          <Property Name="nomePai" Type="nvarchar" MaxLength="50" />
+          <Property Name="nomeMae" Type="nvarchar" MaxLength="50" />
+          <Property Name="cartaoCidadao" Type="nvarchar" MaxLength="50" />
+          <Property Name="cartaoSus" Type="nvarchar" MaxLength="50" />
+          <Property Name="carteiraTrabalhoNumero" Type="nvarchar" MaxLength="50" />
+          <Property Name="certidaoNascimento" Type="nvarchar" MaxLength="50" />
+          <Property Name="certidaoCasamento" Type="nvarchar" MaxLength="50" />
+          <Property Name="conjuge" Type="nvarchar" MaxLength="50" />
+          <Property Name="cpfConjuge" Type="nvarchar" MaxLength="50" />
+          <Property Name="rgConjuge" Type="nvarchar" MaxLength="50" />
+          <Property Name="endereco" Type="nvarchar" MaxLength="50" />
+          <Property Name="bairro" Type="nvarchar" MaxLength="50" />
+          <Property Name="cidade" Type="nvarchar" MaxLength="50" />
+          <Property Name="estado" Type="char" MaxLength="2" />
+          <Property Name="senha" Type="nvarchar(max)" />
+          <Property Name="tipoCadastro" Type="int" />
+          <Property Name="dataCadastro" Type="datetime" />
+          <Property Name="dataUltimaAtualizacao" Type="datetime" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbUsuariosDocumentos">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+            <PropertyRef Name="codTipoDocumento" />
+          </Key>
+          <Property Name="codUsuario" Type="int" Nullable="false" />
+          <Property Name="codTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="arquivo" Type="binary" MaxLength="50" />
+          <Property Name="tipoArquivo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tbUsuariosDocumentos_tbTiposDocumentos">
+          <End Role="tbTiposDocumentos" Type="Self.tbTiposDocumentos" Multiplicity="1" />
+          <End Role="tbUsuariosDocumentos" Type="Self.tbUsuariosDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTiposDocumentos">
+              <PropertyRef Name="codTipoDocumento" />
+            </Principal>
+            <Dependent Role="tbUsuariosDocumentos">
+              <PropertyRef Name="codTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUsuariosDocumentos_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbUsuariosDocumentos" Type="Self.tbUsuariosDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="codUsuario" />
+            </Principal>
+            <Dependent Role="tbUsuariosDocumentos">
+              <PropertyRef Name="codUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ThanosSoftDBModelStoreContainer">
+          <EntitySet Name="tbTiposDocumentos" EntityType="Self.tbTiposDocumentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsuariosDocumentos" EntityType="Self.tbUsuariosDocumentos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbUsuariosDocumentos_tbTiposDocumentos" Association="Self.FK_tbUsuariosDocumentos_tbTiposDocumentos">
+            <End Role="tbTiposDocumentos" EntitySet="tbTiposDocumentos" />
+            <End Role="tbUsuariosDocumentos" EntitySet="tbUsuariosDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUsuariosDocumentos_tbUsuarios" Association="Self.FK_tbUsuariosDocumentos_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbUsuariosDocumentos" EntitySet="tbUsuariosDocumentos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ThanosSoftDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="codTipoDocumento" />
+          </Key>
+          <Property Name="codTipoDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+          </Key>
+          <Property Name="codUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sobrenome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cnh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipocnh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dataNascimento" Type="DateTime" Precision="3" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="estadoCivil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nomePai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nomeMae" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cartaoCidadao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cartaoSus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="carteiraTrabalhoNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="certidaoNascimento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="certidaoCasamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conjuge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpfConjuge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rgConjuge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="senha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tipoCadastro" Type="Int32" />
+          <Property Name="dataCadastro" Type="DateTime" Precision="3" />
+          <Property Name="dataUltimaAtualizacao" Type="DateTime" Precision="3" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UsuariosDocumentos" Relationship="Self.FK_tbUsuariosDocumentos_tbUsuarios" FromRole="tbUsuarios" ToRole="tbUsuariosDocumentos" />
+          <Property Name="endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UsuarioDocumento">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+            <PropertyRef Name="codTipoDocumento" />
+          </Key>
+          <Property Name="codUsuario" Type="Int32" Nullable="false" />
+          <Property Name="codTipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="arquivo" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="tipoArquivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TiposDocumentos" Relationship="Self.FK_tbUsuariosDocumentos_tbTiposDocumentos" FromRole="tbUsuariosDocumentos" ToRole="tbTiposDocumentos" />
+        </EntityType>
+        <Association Name="FK_tbUsuariosDocumentos_tbTiposDocumentos">
+          <End Role="tbTiposDocumentos" Type="ThanosSoftDBModel.TipoDocumento" Multiplicity="1" />
+          <End Role="tbUsuariosDocumentos" Type="ThanosSoftDBModel.UsuarioDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTiposDocumentos">
+              <PropertyRef Name="codTipoDocumento" />
+            </Principal>
+            <Dependent Role="tbUsuariosDocumentos">
+              <PropertyRef Name="codTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUsuariosDocumentos_tbUsuarios">
+          <End Role="tbUsuarios" Type="ThanosSoftDBModel.Usuario" Multiplicity="1" />
+          <End Role="tbUsuariosDocumentos" Type="ThanosSoftDBModel.UsuarioDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="codUsuario" />
+            </Principal>
+            <Dependent Role="tbUsuariosDocumentos">
+              <PropertyRef Name="codUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ThanosSoftDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TiposDocumentos" EntityType="ThanosSoftDBModel.TipoDocumento" />
+          <EntitySet Name="Usuario" EntityType="ThanosSoftDBModel.Usuario" />
+          <EntitySet Name="UsuarioDocumentos" EntityType="ThanosSoftDBModel.UsuarioDocumento" />
+          <AssociationSet Name="FK_tbUsuariosDocumentos_tbTiposDocumentos" Association="Self.FK_tbUsuariosDocumentos_tbTiposDocumentos">
+            <End Role="tbTiposDocumentos" EntitySet="TiposDocumentos" />
+            <End Role="tbUsuariosDocumentos" EntitySet="UsuarioDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUsuariosDocumentos_tbUsuarios" Association="Self.FK_tbUsuariosDocumentos_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="Usuario" />
+            <End Role="tbUsuariosDocumentos" EntitySet="UsuarioDocumentos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ThanosSoftDBModelStoreContainer" CdmEntityContainer="ThanosSoftDBEntities">
+          <EntitySetMapping Name="TiposDocumentos">
+            <EntityTypeMapping TypeName="ThanosSoftDBModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="tbTiposDocumentos">
+                <ScalarProperty Name="codTipoDocumento" ColumnName="codTipoDocumento" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ThanosSoftDBModel.Usuario">
+              <MappingFragment StoreEntitySet="tbUsuarios">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="sobrenome" ColumnName="sobrenome" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="cnh" ColumnName="cnh" />
+                <ScalarProperty Name="tipocnh" ColumnName="tipocnh" />
+                <ScalarProperty Name="dataNascimento" ColumnName="dataNascimento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="nomePai" ColumnName="nomePai" />
+                <ScalarProperty Name="nomeMae" ColumnName="nomeMae" />
+                <ScalarProperty Name="cartaoCidadao" ColumnName="cartaoCidadao" />
+                <ScalarProperty Name="cartaoSus" ColumnName="cartaoSus" />
+                <ScalarProperty Name="carteiraTrabalhoNumero" ColumnName="carteiraTrabalhoNumero" />
+                <ScalarProperty Name="certidaoNascimento" ColumnName="certidaoNascimento" />
+                <ScalarProperty Name="certidaoCasamento" ColumnName="certidaoCasamento" />
+                <ScalarProperty Name="conjuge" ColumnName="conjuge" />
+                <ScalarProperty Name="cpfConjuge" ColumnName="cpfConjuge" />
+                <ScalarProperty Name="rgConjuge" ColumnName="rgConjuge" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="tipoCadastro" ColumnName="tipoCadastro" />
+                <ScalarProperty Name="dataCadastro" ColumnName="dataCadastro" />
+                <ScalarProperty Name="dataUltimaAtualizacao" ColumnName="dataUltimaAtualizacao" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioDocumentos">
+            <EntityTypeMapping TypeName="ThanosSoftDBModel.UsuarioDocumento">
+              <MappingFragment StoreEntitySet="tbUsuariosDocumentos">
+                <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
+                <ScalarProperty Name="codTipoDocumento" ColumnName="codTipoDocumento" />
+                <ScalarProperty Name="arquivo" ColumnName="arquivo" />
+                <ScalarProperty Name="tipoArquivo" ColumnName="tipoArquivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
